@@ -1,0 +1,22 @@
+name: Full N8N Pipeline
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  provision:
+    uses: ./.github/workflows/provision-vps.yml
+    secrets: inherit
+
+  build_and_test:
+    needs: provision
+    uses: ./.github/workflows/build-test.yml
+    secrets: inherit
+
+  deploy:
+    needs: build_and_test
+    uses: ./.github/workflows/deploy-vps.yml
+    secrets: inherit

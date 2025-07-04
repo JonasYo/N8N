@@ -1,0 +1,24 @@
+name: Provision VPS for n8n
+
+on:
+  workflow_call:
+
+jobs:
+  provision:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Provision VPS
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ vars.VPS_HOST }}
+          username: ${{ vars.VPS_USER }}
+          key: ${{ secrets.VPS_DEPLOY_KEY }}
+          script: |
+            sudo apt update
+            sudo apt install -y docker.io docker-compose nginx certbot python3-certbot-nginx
+            sudo systemctl enable docker
+            sudo systemctl start docker
+            sudo usermod -aG docker ${{ vars.VPS_USER }}

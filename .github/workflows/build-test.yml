@@ -1,0 +1,17 @@
+name: Validate n8n configs
+
+on:
+  workflow_call:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate docker-compose.yml
+        run: docker compose config -q
+
+      - name: Validate nginx config
+        run: nginx -t -c $(pwd)/nginx/n8n.conf || true
