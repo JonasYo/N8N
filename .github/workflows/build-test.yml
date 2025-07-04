@@ -11,7 +11,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Validate docker-compose.yml
-        run: docker compose config -q
+        run: docker compose -f infra/docker-compose.yml config -q
 
       - name: Validate nginx config
-        run: nginx -t -c $(pwd)/nginx/n8n.conf || true
+        run: nginx -t -c $(pwd)/infra/nginx/sites-available/n8n.conf || true
