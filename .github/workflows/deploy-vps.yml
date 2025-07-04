@@ -16,7 +16,7 @@ jobs:
           host: ${{ vars.VPS_HOST }}
           username: ${{ vars.VPS_USER }}
           key: ${{ secrets.VPS_DEPLOY_KEY }}
-          source: 'infra'
+          source: 'infra,scripts'
           target: '~${{ vars.VPS_DESTINATION_PATH }}'
 
       - name: Deploy N8N container
