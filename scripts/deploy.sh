@@ -27,4 +27,4 @@ echo "🧹 Limpando recursos..."
 docker system prune -f
 
 echo "✅ Deploy concluído!"
-echo "🌐 Acesse: http://18.231.114.87:5678"
+echo "🌐 Acesse: http://54.94.117.140:5678"

@@ -17,8 +17,8 @@ Configuração para executar N8N em um VPS usando Docker e Nginx.
 
 ## 🌐 URLs de Acesso
 
-- **Direto (porta 5678)**: http://18.231.114.87:5678
-- **Via Nginx (porta 80)**: http://18.231.114.87
+- **Direto (porta 5678)**: http://54.94.117.140:5678
+- **Via Nginx (porta 80)**: http://54.94.117.140
 
 ## 🔧 Credenciais
 

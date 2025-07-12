@@ -28,11 +28,14 @@ jobs:
           script: |
             cd ~${{ vars.VPS_DESTINATION_PATH }}/infra
 
-            echo "📦 Pulling latest n8n image..."
-            docker compose pull n8n || true
+            echo "📁 Creating data directories..."
+            mkdir -p n8n_data minio_data baserow_data
 
-            echo "🚀 Starting n8n container..."
-            docker compose up -d n8n --force-recreate
+            echo "📦 Pulling images..."
+            docker compose pull || true
+
+            echo "🚀 Starting all containers..."
+            docker compose up -d --force-recreate
 
             echo "✅ Deploy completed."
 

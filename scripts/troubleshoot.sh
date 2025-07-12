@@ -40,5 +40,5 @@ echo "📊 Portas em uso:"
 sudo netstat -tlnp | grep -E ':80|:5678'
 
 echo -e "\n🌍 URLs para testar:"
-echo "- Diretamente: http://18.231.114.87:5678"
-echo "- Via Nginx: http://18.231.114.87"
+echo "- Diretamente: http://54.94.117.140:5678"
+echo "- Via Nginx: http://54.94.117.140"

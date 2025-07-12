@@ -13,7 +13,49 @@ services:
       - N8N_PORT=5678
       - N8N_PATH=/n8n/
       - N8N_SECURE_COOKIE=false
-      - WEBHOOK_URL=http://18.231.114.87/n8n
+      - WEBHOOK_URL=http://54.94.117.140/n8n
     volumes:
       - ../n8n_data:/home/node/.n8n
+    restart: always
+
+  minio:
+    image: quay.io/minio/minio:RELEASE.2022-12-12T19-27-27Z
+    command: server /data --console-address ":9001"
+    ports:
+      - '9000:9000'
+      - '9001:9001'
+    environment:
+      MINIO_ROOT_USER: youtube
+      MINIO_ROOT_PASSWORD: cN9mJ3IVVqJUCW2iOhLy
+    volumes:
+      - ../minio_data:/data
+    restart: always
+
+  kokoro-tts:
+    image: ghcr.io/remsky/kokoro-fastapi-cpu:v0.2.2
+    ports:
+      - '8880:8880'
+    restart: always
+
+  baserow:
+    image: baserow/baserow:1.32.5
+    ports:
+      - '85:80'
+    environment:
+      BASEROW_PUBLIC_URL: http://54.94.117.140:85
+    volumes:
+      - ../baserow_data:/baserow/data
+    restart: unless-stopped
+
+  nca-toolkit:
+    image: stephengpope/no-code-architects-toolkit:latest
+    ports:
+      - '8071:8071'
+    environment:
+      API_KEY: AHkrH8JLeXuX0UC5y3zNc5k4wZ678j
+      S3_ENDPOINT_URL: http://host.docker.internal:9000
+      S3_ACCESS_KEY: youtube
+      S3_SECRET_KEY: cN9mJ3IVVqJUCW2iOhLy
+      S3_BUCKET_NAME: nca-toolkit
+      S3_REGION: None
     restart: always
